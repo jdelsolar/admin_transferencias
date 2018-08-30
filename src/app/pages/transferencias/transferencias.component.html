@@ -1,0 +1,36 @@
+<div class="container" *ngIf="_usuario.usuario.id">
+  <h4>
+    Tranferencias
+  </h4>
+  <div class="row separar" *ngFor="let tranf of _tansf.transferencias">
+    <div class="col-sm">
+      {{ tranf.usuario.nombres }} {{ tranf.usuario.paterno }}
+    </div>
+    <div class="col-sm">
+      CL$ {{ tranf.transferencia.monto }}
+    </div>
+    <div class="col-sm">
+      Tasa Bs$ {{ tranf.transferencia.tasa }}
+    </div>
+
+    <div class="col-sm">
+      Nombre: {{ tranf.destinatario.nombre }}
+    </div>
+    <div class="col-sm">
+      Banco: {{ tranf.destinatario.banco }}
+    </div>
+    <div class="col-sm">
+      Cuenta: {{ tranf.destinatario.ncuenta }}
+    </div>
+    <div class="col-sm text-warning">
+      {{ tranf.transferencia.estado }}
+    </div>
+    <div class="col-sm pt-1">
+      <button type="button" class="btn btn-outline-success">Aprobar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!_usuario.usuario.id">
+  <h4> Debe ingresar para ver las transferencias </h4>
+</div>

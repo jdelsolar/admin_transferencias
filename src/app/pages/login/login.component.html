@@ -1,0 +1,23 @@
+<div class="container text-center" *ngIf="!_usuario.usuario.id">
+  <form class="form-signin" ngNativeValidate (submit)="login()">
+    <img class="mb-4" src="assets/img/image123.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Por favor ingrese</h1>
+    <label for="inputEmail" class="sr-only">Correo electrónico</label>
+    <input [(ngModel)]="correo" name="correo" type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico"
+      required autofocus>
+    <label for="inputPassword" class="sr-only">Contraseña</label>
+    <input [(ngModel)]="clave" name="clave" type="password" class="form-control" placeholder="Contraseña" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Recuérdame
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" [disabled]="cargando" type="submit">
+      {{ cargando ? 'Cargando ...' : 'Ingresar' }}</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
+  </form>
+
+</div>
+<div class="container" *ngIf="_usuario.usuario.id">
+  <h4>Bienvenido, {{ _usuario.usuario.nombre }} </h4>
+</div>
