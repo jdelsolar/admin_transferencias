@@ -22,6 +22,13 @@ export class TransferenciasService {
 
     });
   }
+
+  aprobar( id:string ) {
+    let url = URL_SERVICIOS + "/transferencias/aprobar_admin";
+
+    return this.http.post( url, { id: id } );
+
+  }
 }
 
 export interface TransferenciaDestinatario {
