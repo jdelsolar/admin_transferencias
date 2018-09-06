@@ -3,10 +3,12 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from "./pages/login/login.component";
 import { TransferenciasComponent } from "./pages/transferencias/transferencias.component";
+import { ParametrosComponent } from "./pages/parametros/parametros.component";
 
 const app_routes: Routes = [
 	{ path: 'home', component: LoginComponent },
 	{ path: 'transferencias', component: TransferenciasComponent },
+	{ path: 'parametros', component: ParametrosComponent },
 	{ path: '**',pathMatch: 'full', redirectTo: 'home' }
 ];
 

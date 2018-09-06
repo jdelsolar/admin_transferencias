@@ -1,0 +1,20 @@
+<div class="container" *ngIf="_usuario.usuario.id">
+
+	<form [formGroup]="forma" (submit)="enviarTasa()">
+		<div class="form-group col-md-2 " [ngClass]="(forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)) ? 'has-danger' : '' ">
+			<label class="col-form-label" for="inputDefault">Tasa</label>
+			<input formControlName="tasa" name="tasa" type="text" class="form-control " placeholder="Tasa" id="inputDefault" [ngClass]="(forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)) ? 'is-invalid' : '' ">
+			<div *ngIf="forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)" class="invalid-feedback">Tasa
+				incorrecta
+			</div>
+		</div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-primary">Cambiar</button>
+		</div>
+	</form>
+
+</div>
+
+<div class="container" *ngIf="!_usuario.usuario.id">
+	<h4> Debe ingresar para ver las transferencias </h4>
+</div>
