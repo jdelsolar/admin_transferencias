@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ParametrosService } from "../../services/parametros.service";
 import { Subscription } from "rxjs";
@@ -10,7 +10,7 @@ import { UsuarioService } from "../../services/usuario.service";
   templateUrl: "./parametros.component.html",
   styleUrls: ["./parametros.component.css"]
 })
-export class ParametrosComponent implements OnInit {
+export class ParametrosComponent implements OnInit, OnDestroy {
   forma: FormGroup;
 
   constructor( private _parametros: ParametrosService, public _usuario: UsuarioService ) {}
@@ -26,6 +26,11 @@ export class ParametrosComponent implements OnInit {
     this.sub = this._parametros.observarTasa().subscribe( val => {
       this.forma.get('tasa').setValue(val);
     });
+    
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
     
   }
 
