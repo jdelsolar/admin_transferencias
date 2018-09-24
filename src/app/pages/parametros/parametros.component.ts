@@ -20,7 +20,7 @@ export class ParametrosComponent implements OnInit, OnDestroy {
   ngOnInit() {
         
     this.forma = new FormGroup({
-      tasa: new FormControl("", [Validators.required, Validators.min(1), Validators.pattern("^[0-9]*$")])
+      tasa: new FormControl("", [Validators.required, Validators.min(0)] )
     });
 
     this.sub = this._parametros.observarTasa().subscribe( val => {
