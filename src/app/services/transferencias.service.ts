@@ -12,22 +12,23 @@ export class TransferenciasService {
   constructor(private http: HttpClient) {}
 
   cargarTransferencias() {
-    let url = URL_SERVICIOS + "/transferencias/transferencias_admin";
+    const url = URL_SERVICIOS + "/transferencias/transferencias_admin";
 
-    this.http.get(url).subscribe((resp: any) => {
-      if ( resp.respuesta ){
-        this.transferencias = resp.transferencias;
-      }
-    }, err => {
-
-    });
+    this.http.get(url).subscribe(
+      (resp: any) => {
+        if (resp.respuesta) {
+          this.transferencias = resp.transferencias;
+          console.log(resp);
+        }
+      },
+      err => {}
+    );
   }
 
-  aprobar( id:string ) {
-    let url = URL_SERVICIOS + "/transferencias/aprobar_admin";
+  aprobar(id: string) {
+    const url = URL_SERVICIOS + "/transferencias/aprobar_admin";
 
-    return this.http.post( url, { id: id } );
-
+    return this.http.post(url, { id: id });
   }
 }
 
@@ -47,6 +48,7 @@ export interface Usuario {
   correo?: string;
   clave?: string;
   token?: any;
+  ci?: string;
 }
 
 export interface Destinatario {

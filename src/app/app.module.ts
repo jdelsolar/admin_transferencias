@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferenciasComponent } from './pages/transferencias/transferencias.component';
 import { ParametrosComponent } from './pages/parametros/parametros.component';
+import { VerTransferenciaComponent } from './pages/transferencias/ver-transferencia/ver-transferencia.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ParametrosComponent } from './pages/parametros/parametros.component';
     HeaderComponent,
     LoginComponent,
     TransferenciasComponent,
-    ParametrosComponent
+    ParametrosComponent,
+    VerTransferenciaComponent
   ],
   imports: [
     BrowserModule,
