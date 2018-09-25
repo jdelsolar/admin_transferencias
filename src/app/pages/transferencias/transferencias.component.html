@@ -34,6 +34,15 @@
       <button type="button" (click)="ver( tranf )" class="btn btn-outline-primary">Ver</button>
     </div>
   </div>
+  <div>
+    <ul class="pagination">
+      
+      <li *ngFor="let p of _tansf.paginas" class="page-item" [ngClass]="(p === _tansf.pag) ? 'active' : ''">
+        <a (click)="verPag(p)" class="page-link" >{{ p + 1 }}</a>
+      </li>
+           
+    </ul>
+  </div>
 
   <!-- Btn Hidden -->
   <button id="btn-modal" type="button" [hidden]="'true'" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

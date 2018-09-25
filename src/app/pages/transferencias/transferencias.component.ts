@@ -14,7 +14,6 @@ import swal from "sweetalert";
   styleUrls: ["./transferencias.component.css"]
 })
 export class TransferenciasComponent implements OnInit {
-
   tran: TransferenciaDestinatario = {};
 
   constructor(
@@ -23,7 +22,7 @@ export class TransferenciasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._tansf.cargarTransferencias();
+    this._tansf.cargarTransferencias(this._usuario.usuario.token, this._tansf.pag);
   }
 
   ver(transf: TransferenciaDestinatario) {
@@ -38,9 +37,14 @@ export class TransferenciasComponent implements OnInit {
       (resp: any) => {
         swal("Transferencia aprobada");
 
-        this._tansf.cargarTransferencias();
+        this._tansf.cargarTransferencias(this._usuario.usuario.token, this._tansf.pag);
       },
       err => {}
     );
+  }
+
+  verPag(i: number) {
+    this._tansf.pag = i;
+    this._tansf.cargarTransferencias(this._usuario.usuario.token, this._tansf.pag);
   }
 }

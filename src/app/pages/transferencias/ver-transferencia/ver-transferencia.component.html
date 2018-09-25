@@ -49,8 +49,10 @@
     Imagen:
   </div>
   <div class="col-6 text-right">
-    <img *ngIf="tranferencia?.transferencia?.imagen" width="150px;" class="img-responsive" [src]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen"
-      alt="">
+    <a *ngIf="tranferencia?.transferencia?.imagen" [href]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen">
+      <img width="150px;" class="img-responsive" [src]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen"
+        alt="">
+    </a>
   </div>
 </div>
 <div class="font-weight-bold pb-1">

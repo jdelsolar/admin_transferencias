@@ -9,16 +9,32 @@ import { URL_SERVICIOS } from "../url.config";
 export class TransferenciasService {
   transferencias: TransferenciaDestinatario[] = [];
 
+  registros: number = 0;
+
+  pag: number = 0;
+
+  paginas: number[] = [];
+
   constructor(private http: HttpClient) {}
 
-  cargarTransferencias() {
-    const url = URL_SERVICIOS + "/transferencias/transferencias_admin";
+  cargarTransferencias(token: string, pag: number) {
+    const url =
+      URL_SERVICIOS +
+      "/transferencias/transferencias_admin/" +
+      token +
+      "/" +
+      pag;
 
     this.http.get(url).subscribe(
       (resp: any) => {
         if (resp.respuesta) {
           this.transferencias = resp.transferencias;
-          console.log(resp);
+          this.registros = resp.registros;
+          let total = parseInt("" + this.registros / 10);
+          this.paginas = [];
+          for (let i = 0; i <= total; i++) {
+            this.paginas.push(i);
+          }
         }
       },
       err => {}
