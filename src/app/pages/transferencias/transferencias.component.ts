@@ -15,6 +15,7 @@ import swal from "sweetalert";
 })
 export class TransferenciasComponent implements OnInit {
   tran: TransferenciaDestinatario = {};
+  id_rechazo: string = null;
 
   constructor(
     public _usuario: UsuarioService,
@@ -22,7 +23,10 @@ export class TransferenciasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._tansf.cargarTransferencias(this._usuario.usuario.token, this._tansf.pag);
+    this._tansf.cargarTransferencias(
+      this._usuario.usuario.token,
+      this._tansf.pag
+    );
   }
 
   ver(transf: TransferenciaDestinatario) {
@@ -31,20 +35,54 @@ export class TransferenciasComponent implements OnInit {
   }
 
   aprobar(id: string) {
-    console.log(id);
-
     this._tansf.aprobar(id).subscribe(
       (resp: any) => {
         swal("Transferencia aprobada");
 
-        this._tansf.cargarTransferencias(this._usuario.usuario.token, this._tansf.pag);
+        this._tansf.cargarTransferencias(
+          this._usuario.usuario.token,
+          this._tansf.pag
+        );
       },
       err => {}
     );
   }
 
+  rechazar(id: string) {
+    this.id_rechazo = id;
+    document.getElementById("btn-rechazo").click();
+  }
+
+  rechazarMotivo(imotivo) {
+    document.getElementById("btn-rechazo").click();
+    this._tansf
+      .rechazar(this.id_rechazo, imotivo, this._usuario.usuario.token)
+      .subscribe(
+        (resp: any) => {
+          
+          swal("Transferencia rechazada");
+
+          this._tansf.cargarTransferencias(
+            this._usuario.usuario.token,
+            this._tansf.pag
+          );
+        },
+        err => {}
+      );
+  }
+
   verPag(i: number) {
     this._tansf.pag = i;
-    this._tansf.cargarTransferencias(this._usuario.usuario.token, this._tansf.pag);
+    this._tansf.cargarTransferencias(
+      this._usuario.usuario.token,
+      this._tansf.pag
+    );
+  }
+
+  totalBs(transf: TransferenciaDestinatario) {
+    return (
+      parseFloat(transf.transferencia.monto) *
+      parseFloat(transf.transferencia.tasa)
+    );
   }
 }

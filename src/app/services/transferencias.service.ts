@@ -46,6 +46,13 @@ export class TransferenciasService {
 
     return this.http.post(url, { id: id });
   }
+
+  rechazar( id: string, motivo: string, token: string ) {
+    const url = URL_SERVICIOS + '/transferencias/rechazar_admin';
+
+    return this.http.post( url, { token: token, id: id, motivo: motivo } );
+  }
+
 }
 
 export interface TransferenciaDestinatario {
@@ -90,4 +97,6 @@ export interface Transferencia {
   fecha?: string;
   fecha_estado?: string;
   id_usuario?: string;
+  motivo_rechazo?: string;
+  fecha_apr_rech?: string;
 }

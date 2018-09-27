@@ -12,6 +12,9 @@
     <div class="col-sm">
       Tasa Bs$ {{ tranf?.transferencia?.tasa }}
     </div>
+    <div class="col-sm">
+      Total Bs$ {{ totalBs(tranf) }}
+    </div>
 
     <div class="col-sm">
       Nombre: {{ tranf?.destinatario?.nombre }}
@@ -26,9 +29,14 @@
       {{ tranf?.transferencia?.estado }}
     </div>
     <div class="col-sm pt-1">
-      <button (click)="aprobar( tranf.transferencia.id )" [disabled]="tranf.transferencia.estado == 'Aprobado'" type="button"
-        class="btn btn-outline-success">Aprobar</button>
-
+      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button id="btnGroupDrop2" type="button" class="btn btn-outline-success dropdown-toggle " data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" [disabled]="tranf?.transferencia?.estado != 'Pendiente'">Acciones</button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+          <button type="button" class="dropdown-item" (click)="aprobar( tranf.transferencia.id )">Aprobar</button>
+          <button type="button" class="dropdown-item" (click)="rechazar( tranf.transferencia.id )">Rechazar</button>
+        </div>
+      </div>
     </div>
     <div class="col-sm pt-1">
       <button type="button" (click)="ver( tranf )" class="btn btn-outline-primary">Ver</button>
@@ -36,11 +44,11 @@
   </div>
   <div>
     <ul class="pagination">
-      
+
       <li *ngFor="let p of _tansf.paginas" class="page-item" [ngClass]="(p === _tansf.pag) ? 'active' : ''">
-        <a (click)="verPag(p)" class="page-link" >{{ p + 1 }}</a>
+        <a (click)="verPag(p)" class="page-link">{{ p + 1 }}</a>
       </li>
-           
+
     </ul>
   </div>
 
@@ -69,8 +77,32 @@
     </div>
   </div>
 
-</div>
+  <!-- Modal para el rechazo -->
+  <div class="modal fade" id="modalRechazo" tabindex="-1" role="dialog" aria-labelledby="modalRechazoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRechazoLabel">Motivo del rechazo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <input #imotivo type="text" class="form-control" value="No realizó el depósito">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="rechazarMotivo(imotivo.value)">Aceptar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Boton motivo -->
+  <button id="btn-rechazo" type="button" [hidden]="'true'" class="btn btn-primary" data-toggle="modal" data-target="#modalRechazo">
+    xxx
+  </button>
 
-<div class="container" *ngIf="!_usuario.usuario.id">
-  <h4> Debe ingresar para ver las transferencias </h4>
-</div>
+  <div class="container" *ngIf="!_usuario.usuario.id">
+    <h4> Debe ingresar para ver las transferencias </h4>
+  </div>
