@@ -35,7 +35,8 @@ export class TransferenciasComponent implements OnInit {
   }
 
   aprobar(id: string) {
-    this._tansf.aprobar(id).subscribe(
+    const token = this._usuario.usuario.token;
+    this._tansf.aprobar(id, token).subscribe(
       (resp: any) => {
         swal("Transferencia aprobada");
 
@@ -59,7 +60,6 @@ export class TransferenciasComponent implements OnInit {
       .rechazar(this.id_rechazo, imotivo, this._usuario.usuario.token)
       .subscribe(
         (resp: any) => {
-          
           swal("Transferencia rechazada");
 
           this._tansf.cargarTransferencias(

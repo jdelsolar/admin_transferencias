@@ -6,18 +6,14 @@ import { TransferenciasComponent } from "./pages/transferencias/transferencias.c
 import { ParametrosComponent } from "./pages/parametros/parametros.component";
 
 const app_routes: Routes = [
-	{ path: 'home', component: LoginComponent },
-	{ path: 'transferencias', component: TransferenciasComponent },
-	{ path: 'parametros', component: ParametrosComponent },
-	{ path: '**',pathMatch: 'full', redirectTo: 'home' }
+  { path: "home", component: LoginComponent },
+  { path: "transferencias", component: TransferenciasComponent },
+  { path: "parametros", component: ParametrosComponent },
+  { path: "**", pathMatch: "full", redirectTo: "home" }
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forRoot( app_routes, { useHash: true } )
-	],
-	exports: [
-		RouterModule
-	]
+  imports: [RouterModule.forRoot(app_routes, { useHash: true })],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -17,7 +17,7 @@ export class UsuarioService {
   }
 
   loginAdmin(correo, clave) {
-    let url = URL_SERVICIOS + "/usuario/admin_login";
+    const url = URL_SERVICIOS + "/usuario/admin_login";
 
     return new Promise((resolve, reject) => {
       this.http.post(url, { correo: correo, clave: clave }).subscribe(

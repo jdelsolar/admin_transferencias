@@ -30,7 +30,8 @@ export class TransferenciasService {
         if (resp.respuesta) {
           this.transferencias = resp.transferencias;
           this.registros = resp.registros;
-          let total = parseInt("" + this.registros / 10);
+          // tslint:disable-next-line:radix
+          const total = parseInt("" + this.registros / 10);
           this.paginas = [];
           for (let i = 0; i <= total; i++) {
             this.paginas.push(i);
@@ -41,10 +42,10 @@ export class TransferenciasService {
     );
   }
 
-  aprobar(id: string) {
+  aprobar(id: string, token: string) {
     const url = URL_SERVICIOS + "/transferencias/aprobar_admin";
 
-    return this.http.post(url, { id: id });
+    return this.http.post(url, { id: id, token: token });
   }
 
   rechazar( id: string, motivo: string, token: string ) {
