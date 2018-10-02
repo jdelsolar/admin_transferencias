@@ -1,0 +1,16 @@
+<form>
+    <h5 *ngIf="cargando">Cargando archivo <i class="fas fa-spinner fa-spin"></i></h5>  
+  <div class="form-group">
+    <div class="input-group mb-3">
+      
+      <div class="custom-file">
+        <input (change)="seleccionImagen( $event.target.files[0] )" type="file" class="custom-file-input" id="inputGroupFile02">
+        <label #txtInput class="custom-file-label" for="inputGroupFile02">Seleccionar archivo</label>
+      </div> 
+      <div class="input-group-append">
+        <!-- <span class="input-group-text" id="">Subir</span> -->
+        <button [disabled]="!archivoSubir" (click)="subirArchivo()" type="button" class="btn btn-outline-primary">Subir</button>
+      </div>
+    </div>
+  </div>
+</form>

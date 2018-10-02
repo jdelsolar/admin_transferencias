@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferenciasComponent } from './pages/transferencias/transferencias.component';
 import { ParametrosComponent } from './pages/parametros/parametros.component';
 import { VerTransferenciaComponent } from './pages/transferencias/ver-transferencia/ver-transferencia.component';
+import { SubirArchivoComponent } from './shared/subir-archivo/subir-archivo.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { VerTransferenciaComponent } from './pages/transferencias/ver-transferen
     LoginComponent,
     TransferenciasComponent,
     ParametrosComponent,
-    VerTransferenciaComponent
+    VerTransferenciaComponent,
+    SubirArchivoComponent
   ],
   imports: [
     BrowserModule,

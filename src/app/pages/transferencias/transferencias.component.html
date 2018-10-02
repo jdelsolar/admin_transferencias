@@ -29,18 +29,24 @@
       {{ tranf?.transferencia?.estado }}
     </div>
     <div class="col-sm pt-1">
-      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button id="btnGroupDrop2" type="button" class="btn btn-outline-success dropdown-toggle " data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" [disabled]="tranf?.transferencia?.estado != 'Pendiente'">Acciones</button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
-          <button type="button" class="dropdown-item" (click)="aprobar( tranf.transferencia.id )">Aprobar</button>
-          <button type="button" class="dropdown-item" (click)="rechazar( tranf.transferencia.id )">Rechazar</button>
+      <div class="p-1">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <button id="btnGroupDrop2" type="button" class="btn btn-outline-success dropdown-toggle " data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" [disabled]="tranf?.transferencia?.estado != 'Pendiente'">Acciones</button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 35px, 0px);">
+            <button type="button" class="dropdown-item" (click)="aprobar( tranf.transferencia.id )">Aprobar</button>
+            <button type="button" class="dropdown-item" (click)="rechazar( tranf.transferencia.id )">Rechazar</button>
+          </div>
         </div>
       </div>
+      <div class="p-1">
+        <button type="button" (click)="modalAdjuntar( tranf ) " class="btn btn-outline-primary">Comprobante</button>
+      </div>
+      <div class="p-1">
+        <button type="button" (click)="ver( tranf )" class="btn btn-outline-primary">Ver</button>
+      </div>
     </div>
-    <div class="col-sm pt-1">
-      <button type="button" (click)="ver( tranf )" class="btn btn-outline-primary">Ver</button>
-    </div>
+
   </div>
   <div>
     <ul class="pagination">
@@ -51,6 +57,32 @@
 
     </ul>
   </div>
+
+  <!-- btn enviar comprobante -->
+  <button id="btn-comprobante" type="button" [hidden]="'true'" data-toggle="modal" data-target="#modalComprobante">
+    xxx
+  </button>
+  <!-- Modal Comprobante -->
+  <div class="modal fade" id="modalComprobante" tabindex="-1" role="dialog" aria-labelledby="modalComprobanteLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalComprobanteLabel">Adjuntar comprobante depósito</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-subir-archivo (datosArchivo)="adjuntarComprobante( $event )"></app-subir-archivo>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Btn Hidden -->
   <button id="btn-modal" type="button" [hidden]="'true'" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -88,7 +120,7 @@
           </button>
         </div>
         <div class="modal-body">
-          
+
           <input #imotivo type="text" class="form-control" value="No realizó el depósito">
         </div>
         <div class="modal-footer">

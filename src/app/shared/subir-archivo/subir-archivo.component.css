@@ -1,0 +1,7 @@
+.custom-file-input ~ .custom-file-label::after {
+    content: "Seleccione";
+}
+
+.custom-file-label {
+    color: black;
+}

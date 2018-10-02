@@ -7,6 +7,7 @@ import {
 } from "../../services/transferencias.service";
 
 import swal from "sweetalert";
+import { _sanitizeHtml } from "@angular/core/src/sanitization/html_sanitizer";
 
 @Component({
   selector: "app-transferencias",
@@ -16,6 +17,7 @@ import swal from "sweetalert";
 export class TransferenciasComponent implements OnInit {
   tran: TransferenciaDestinatario = {};
   id_rechazo: string = null;
+  id_finalizar: string = null;
 
   constructor(
     public _usuario: UsuarioService,
@@ -84,5 +86,27 @@ export class TransferenciasComponent implements OnInit {
       parseFloat(transf.transferencia.monto) *
       parseFloat(transf.transferencia.tasa)
     );
+  }
+
+  adjuntarComprobante(event) {
+    document.getElementById("btn-comprobante").click();
+
+    // El archivo esta subido falta finalizar transferencia
+    this._tansf
+      .finalizar(
+        this.id_finalizar,
+        this._usuario.usuario.token,
+        event.file_name
+      )
+      .subscribe((resp: any) => {
+        this._tansf.cargarTransferencias(
+          this._usuario.usuario.token,
+          this._tansf.pag
+        );
+      });
+  }
+  modalAdjuntar(tranf: TransferenciaDestinatario) {
+    this.id_finalizar = tranf.transferencia.id;
+    document.getElementById("btn-comprobante").click();
   }
 }

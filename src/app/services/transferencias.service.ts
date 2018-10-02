@@ -48,12 +48,21 @@ export class TransferenciasService {
     return this.http.post(url, { id: id, token: token });
   }
 
-  rechazar( id: string, motivo: string, token: string ) {
-    const url = URL_SERVICIOS + '/transferencias/rechazar_admin';
+  rechazar(id: string, motivo: string, token: string) {
+    const url = URL_SERVICIOS + "/transferencias/rechazar_admin";
 
-    return this.http.post( url, { token: token, id: id, motivo: motivo } );
+    return this.http.post(url, { token: token, id: id, motivo: motivo });
   }
 
+  finalizar(id_transferencia: string, token: string, nombre_archivo: string) {
+    const url = URL_SERVICIOS + "/transferencias/admin_finalizar";
+
+    return this.http.post(url, {
+      token: token,
+      id_transferencia: id_transferencia,
+      nombre_archivo: nombre_archivo
+    });
+  }
 }
 
 export interface TransferenciaDestinatario {
