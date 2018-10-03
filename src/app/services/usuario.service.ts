@@ -50,4 +50,5 @@ export interface Usuario {
   fecha?: string;
   token?: string;
   clave?: string;
+  rol?: string;
 }

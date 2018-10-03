@@ -109,4 +109,5 @@ export interface Transferencia {
   id_usuario?: string;
   motivo_rechazo?: string;
   fecha_apr_rech?: string;
+  imagen_deposito?: string;
 }

@@ -12,6 +12,9 @@ import { TransferenciasComponent } from './pages/transferencias/transferencias.c
 import { ParametrosComponent } from './pages/parametros/parametros.component';
 import { VerTransferenciaComponent } from './pages/transferencias/ver-transferencia/ver-transferencia.component';
 import { SubirArchivoComponent } from './shared/subir-archivo/subir-archivo.component';
+import { CuentasComponent } from './pages/cuentas/cuentas.component';
+import { FormularioComponent } from './pages/cuentas/formulario/formulario.component';
+import { ListaComponent } from './pages/cuentas/lista/lista.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { SubirArchivoComponent } from './shared/subir-archivo/subir-archivo.comp
     TransferenciasComponent,
     ParametrosComponent,
     VerTransferenciaComponent,
-    SubirArchivoComponent
+    SubirArchivoComponent,
+    CuentasComponent,
+    FormularioComponent,
+    ListaComponent
   ],
   imports: [
     BrowserModule,

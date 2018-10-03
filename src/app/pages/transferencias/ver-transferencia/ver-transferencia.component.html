@@ -49,7 +49,7 @@
     Total Bs:
   </div>
   <div class="col-6 text-right">
-    {{ totalBs()  }}
+    {{ totalBs() }}
   </div>
 </div>
 <div class="row ">
@@ -59,6 +59,25 @@
   <div class="col-6 text-right">
     <a *ngIf="tranferencia?.transferencia?.imagen" [href]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen">
       <img width="150px;" class="img-responsive" [src]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen"
+        alt="">
+    </a>
+  </div>
+</div>
+<div class="row ">
+  <div class="col-6 font-weight-bold">
+    Motivo rechazo:
+  </div>
+  <div class="col-6 text-right">
+    {{ tranferencia?.transferencia?.motivo_rechazo }}
+  </div>
+</div>
+<div class="row ">
+  <div class="col-6 font-weight-bold">
+    Imagen deposito Venezuela:
+  </div>
+  <div class="col-6 text-right">
+    <a *ngIf="tranferencia?.transferencia?.imagen_deposito" [href]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen_deposito">
+      <img width="150px;" class="img-responsive" [src]="'http://www.123depositos.com/transferencias_rest/uploads/' +  tranferencia?.transferencia?.imagen_deposito"
         alt="">
     </a>
   </div>

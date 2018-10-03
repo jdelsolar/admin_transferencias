@@ -1,0 +1,19 @@
+<h3>
+  Lista de administradores
+</h3>
+<div *ngFor="let cuenta of _cuentas.usuarios" class="row p-1">
+  <div class="col-sm">
+    {{ cuenta.correo }}
+  </div>
+  <div class="col-sm">
+    {{ cuenta.nombre }}
+  </div>
+  <div class="col-sm">
+    {{ cuenta.rol === 'A' ? 'Administrador' : 'Usuario' }}
+  </div>
+  <div class="col-sm">
+    <button (click)="modificar( cuenta )" class="btn btn-sm btn-outline-success">Modificar</button> &nbsp;
+
+    <button (click)="eliminar( cuenta )" class="btn btn-sm btn-outline-danger">Eliminar</button>
+  </div>
+</div>
