@@ -7,6 +7,8 @@ import { URL_SERVICIOS } from "../url.config";
   providedIn: "root"
 })
 export class TransferenciasService {
+  estados = ["Aprobado", "Rechazado", "Pendiente", "Finalizado"];
+
   transferencias: TransferenciaDestinatario[] = [];
 
   registros: number = 0;
@@ -17,13 +19,13 @@ export class TransferenciasService {
 
   constructor(private http: HttpClient) {}
 
-  cargarTransferencias(token: string, pag: number) {
+  cargarTransferencias(token: string, pag: number, estado = '') {
     const url =
       URL_SERVICIOS +
       "/transferencias/transferencias_admin/" +
       token +
       "/" +
-      pag;
+      pag + "/" + estado;
 
     this.http.get(url).subscribe(
       (resp: any) => {

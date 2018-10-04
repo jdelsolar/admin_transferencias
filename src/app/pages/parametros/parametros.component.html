@@ -1,4 +1,4 @@
-<div class="container" *ngIf="_usuario.usuario.id">
+<div class="container" *ngIf="_usuario.usuario.id && _usuario.usuario.rol === 'A'">
 
 	<form [formGroup]="forma" (submit)="enviarTasa()">
 		<div class="form-group col-md-2 " [ngClass]="(forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)) ? 'has-danger' : '' ">
@@ -17,4 +17,7 @@
 
 <div class="container" *ngIf="!_usuario.usuario.id">
 	<h4> Debe ingresar para ver las transferencias </h4>
+</div>
+<div class="container" *ngIf="_usuario.usuario.rol != 'A'">
+	<h4> Sin permisos. </h4>
 </div>

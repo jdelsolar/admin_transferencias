@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Usuario } from "../../services/usuario.service";
+import { Usuario, UsuarioService } from "../../services/usuario.service";
 
 @Component({
   selector: "app-cuentas",
@@ -9,7 +9,7 @@ import { Usuario } from "../../services/usuario.service";
 export class CuentasComponent implements OnInit {
   cuentaModificar: Usuario = null;
 
-  constructor() {}
+  constructor( public _usuario: UsuarioService ) {}
 
   ngOnInit() {}
 

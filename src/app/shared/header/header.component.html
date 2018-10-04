@@ -23,7 +23,8 @@
 
       </ul>
 
-      <button class="btn btn-secondary my-2 my-sm-0" routerLink="/home">Ingresar</button>
+      <button *ngIf="!_usuario.usuario.id" class="btn btn-secondary my-2 my-sm-0" routerLink="/home">Ingresar</button> &nbsp;
+      <button *ngIf="_usuario.usuario.id" class="btn btn-secondary my-2 my-sm-0" (click)="cerrarSesion()">Cerrar sesión</button>
 
     </div>
 

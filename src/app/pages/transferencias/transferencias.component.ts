@@ -109,4 +109,12 @@ export class TransferenciasComponent implements OnInit {
     this.id_finalizar = tranf.transferencia.id;
     document.getElementById("btn-comprobante").click();
   }
+
+  cambiar(estado) {
+    this._tansf.cargarTransferencias(
+      this._usuario.usuario.token,
+      this._tansf.pag,
+      estado
+    );
+  }
 }

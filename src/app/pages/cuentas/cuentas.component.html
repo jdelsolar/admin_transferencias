@@ -1,11 +1,20 @@
-<div class="container">
+
+<div *ngIf="_usuario.usuario.id && ( _usuario.usuario.rol === 'A' )" class="container">
 
   <app-formulario [cuentaModificar]="cuentaModificar"></app-formulario>
+  <hr>
+
+  <app-lista (cuentaModificar)="modificar( $event )" ></app-lista>
 
 </div>
 
-<div class="container">
-  <app-lista (cuentaModificar)="modificar( $event )" ></app-lista>
-
+<div *ngIf="!_usuario.usuario.id" class="container">
+  
+  <h4>Debe ingresar para ver cambiar cuentas de usuario.</h4>
+  
+</div>
+<div *ngIf="_usuario.usuario.rol != 'A'" class="container">
+  
+  <h4>Sin permisos.</h4>
   
 </div>
