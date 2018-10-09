@@ -14,13 +14,14 @@
     </div>
   </div>
   <div class="row separar" *ngFor="let tranf of _tansf.transferencias">
-    <div class="col-sm">
+    
+    <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
       {{ tranf?.usuario?.nombres }} {{ tranf?.usuario?.paterno }}
     </div>
-    <div class="col-sm">
+    <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
       CL$ {{ tranf?.transferencia?.monto }}
     </div>
-    <div class="col-sm">
+    <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
       Tasa Bs$ {{ tranf?.transferencia?.tasa }}
     </div>
     <div class="col-sm">

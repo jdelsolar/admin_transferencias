@@ -1,7 +1,7 @@
-<div class="font-weight-bold pb-1">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="font-weight-bold pb-1">
   Enviado por:
 </div>
-<div class="row">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row">
   <div class="col-6 font-weight-bold">
     Nombre:
   </div>
@@ -9,7 +9,7 @@
     {{ tranferencia?.usuario?.paterno + ', ' + tranferencia?.usuario?.nombres }}
   </div>
 </div>
-<div class="row ">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row ">
   <div class="col-6 font-weight-bold">
     CI:
   </div>
@@ -17,7 +17,7 @@
     {{ tranferencia?.usuario?.ci }}
   </div>
 </div>
-<div class="row ">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row ">
   <div class="col-6 font-weight-bold">
     Correo:
   </div>
@@ -25,10 +25,10 @@
     {{ tranferencia?.usuario?.correo }}
   </div>
 </div>
-<div class="font-weight-bold pb-1">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="font-weight-bold pb-1">
   Datos del depósito:
 </div>
-<div class="row ">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row ">
   <div class="col-6 font-weight-bold">
     Monto:
   </div>
@@ -36,7 +36,7 @@
     {{ tranferencia?.transferencia?.monto }}
   </div>
 </div>
-<div class="row ">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row ">
   <div class="col-6 font-weight-bold">
     Tasa:
   </div>
@@ -52,7 +52,7 @@
     {{ totalBs() }}
   </div>
 </div>
-<div class="row ">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row ">
   <div class="col-6 font-weight-bold">
     Imagen:
   </div>
@@ -63,7 +63,7 @@
     </a>
   </div>
 </div>
-<div class="row ">
+<div *ngIf="_usuario.usuario.rol === 'A'" class="row ">
   <div class="col-6 font-weight-bold">
     Motivo rechazo:
   </div>
