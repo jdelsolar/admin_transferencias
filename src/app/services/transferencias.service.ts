@@ -112,4 +112,5 @@ export interface Transferencia {
   motivo_rechazo?: string;
   fecha_apr_rech?: string;
   imagen_deposito?: string;
+  tipo_pago?: string;
 }
