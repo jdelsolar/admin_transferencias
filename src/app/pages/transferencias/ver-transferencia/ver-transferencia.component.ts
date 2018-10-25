@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { TransferenciaDestinatario } from "../../../services/transferencias.service";
+import { UsuarioService } from "src/app/services/usuario.service";
 
 @Component({
   selector: "app-ver-transferencia",
@@ -10,7 +11,7 @@ export class VerTransferenciaComponent implements OnInit {
   @Input()
   tranferencia: TransferenciaDestinatario = {};
 
-  constructor() {}
+  constructor( public _usuario: UsuarioService ) {}
 
   ngOnInit() {}
 

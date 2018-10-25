@@ -47,7 +47,9 @@ export class TransferenciasComponent implements OnInit {
           this._tansf.pag
         );
       },
-      err => {}
+      err => {
+        console.log(err);
+      }
     );
   }
 
