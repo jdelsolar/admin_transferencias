@@ -15,6 +15,7 @@ import { SubirArchivoComponent } from './shared/subir-archivo/subir-archivo.comp
 import { CuentasComponent } from './pages/cuentas/cuentas.component';
 import { FormularioComponent } from './pages/cuentas/formulario/formulario.component';
 import { ListaComponent } from './pages/cuentas/lista/lista.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ListaComponent } from './pages/cuentas/lista/lista.component';
     SubirArchivoComponent,
     CuentasComponent,
     FormularioComponent,
-    ListaComponent
+    ListaComponent,
+    ReporteComponent
   ],
   imports: [
     BrowserModule,

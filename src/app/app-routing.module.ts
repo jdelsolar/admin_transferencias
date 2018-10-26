@@ -5,12 +5,14 @@ import { LoginComponent } from "./pages/login/login.component";
 import { TransferenciasComponent } from "./pages/transferencias/transferencias.component";
 import { ParametrosComponent } from "./pages/parametros/parametros.component";
 import { CuentasComponent } from "./pages/cuentas/cuentas.component";
+import { ReporteComponent } from "./pages/reporte/reporte.component";
 
 const app_routes: Routes = [
   { path: "home", component: LoginComponent },
   { path: "transferencias", component: TransferenciasComponent },
   { path: "parametros", component: ParametrosComponent },
   { path: "cuentas", component: CuentasComponent },
+  { path: "reporte", component: ReporteComponent },
   { path: "**", pathMatch: "full", redirectTo: "home" }
 ];
 

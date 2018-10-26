@@ -1,0 +1,23 @@
+<div class="container">
+  <h4>Reporte diario</h4>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Dia</th>
+        <th scope="col">Mes</th>
+        <th scope="col">Año</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Tasa promedio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of reporte.reporte_diario" [ngClass]="" >
+        <td> {{ row.dia }} </td>
+        <td> {{ row.mes }} </td>
+        <td> {{ row.anno }} </td>
+        <td> {{ row.monto }} </td>
+        <td> {{ row.tasa_promedio }} </td>
+      </tr>
+    </tbody>
+  </table> 
+</div>
