@@ -1,0 +1,43 @@
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav nav-item">
+      <button class="btn btn-group-sm btn-outline-primary" (click)="mostrarModalCompra()">Agregar Compra</button>
+    </li>
+    <li class="nav nav-item">
+      <button class="btn btn-group-sm btn-outline-primary">Transferencia</button>
+    </li>
+  </ul>
+</div>
+<div class="container">
+  <div *ngFor="let compra of _compras.compras" class="card bg-light">
+    <div class="card-header">Compra de Bs</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group row">
+            <label for="chp" class="col-sm-4 col-form-label">CHP</label>
+            <div class="col-sm-8">
+              <input type="text" readonly="" class="form-control-plaintext" id="chp" [value]="compra.montochp">
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group row">
+            <label for="bs" class="col-sm-4 col-form-label">Bs</label>
+            <div class="col-sm-8">
+              <input type="text" readonly="" class="form-control-plaintext" id="bs" [value]="compra.montobs">
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group row">
+            <label for="tasa" class="col-sm-4 col-form-label ">Tasa mínima</label>
+            <div class="col-sm-8">
+              <input type="text" readonly="" class="form-control-plaintext" id="tasa" [value]="compra.minTasa">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

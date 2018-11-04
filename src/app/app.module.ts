@@ -6,6 +6,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferenciasComponent } from './pages/transferencias/transferencias.component';
@@ -16,6 +17,8 @@ import { CuentasComponent } from './pages/cuentas/cuentas.component';
 import { FormularioComponent } from './pages/cuentas/formulario/formulario.component';
 import { ListaComponent } from './pages/cuentas/lista/lista.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
+import { ComprasComponent } from './pages/compras/compras.component';
+import { AgregarComponent } from './pages/compras/modals/agregar/agregar.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +32,22 @@ import { ReporteComponent } from './pages/reporte/reporte.component';
     CuentasComponent,
     FormularioComponent,
     ListaComponent,
-    ReporteComponent
+    ReporteComponent,
+    ComprasComponent,
+    AgregarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BootstrapModalModule.forRoot({container:document.body})
   ],
   providers: [],
+  entryComponents: [
+    AgregarComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

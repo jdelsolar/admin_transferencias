@@ -6,6 +6,7 @@ import { TransferenciasComponent } from "./pages/transferencias/transferencias.c
 import { ParametrosComponent } from "./pages/parametros/parametros.component";
 import { CuentasComponent } from "./pages/cuentas/cuentas.component";
 import { ReporteComponent } from "./pages/reporte/reporte.component";
+import { ComprasComponent } from "./pages/compras/compras.component";
 
 const app_routes: Routes = [
   { path: "home", component: LoginComponent },
@@ -13,6 +14,7 @@ const app_routes: Routes = [
   { path: "parametros", component: ParametrosComponent },
   { path: "cuentas", component: CuentasComponent },
   { path: "reporte", component: ReporteComponent },
+  { path: "compras", component: ComprasComponent },
   { path: "**", pathMatch: "full", redirectTo: "home" }
 ];
 
