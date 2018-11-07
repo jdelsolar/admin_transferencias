@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { ComprasService } from "src/app/services/compras.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
 
 export interface ConfirmModel {
   title: string;

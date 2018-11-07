@@ -19,6 +19,7 @@ import { ListaComponent } from './pages/cuentas/lista/lista.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { AgregarComponent } from './pages/compras/modals/agregar/agregar.component';
+import { TransferenciaComponent } from './pages/compras/modals/transferencia/transferencia.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AgregarComponent } from './pages/compras/modals/agregar/agregar.compone
     ListaComponent,
     ReporteComponent,
     ComprasComponent,
-    AgregarComponent
+    AgregarComponent,
+    TransferenciaComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +44,12 @@ import { AgregarComponent } from './pages/compras/modals/agregar/agregar.compone
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BootstrapModalModule.forRoot({container:document.body})
+    BootstrapModalModule.forRoot({container: document.body})
   ],
   providers: [],
   entryComponents: [
-    AgregarComponent
+    AgregarComponent,
+    TransferenciaComponent
   ],
   bootstrap: [AppComponent]
 })

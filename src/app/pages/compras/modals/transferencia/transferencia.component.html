@@ -1,0 +1,71 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Agregar transferencia</h4>
+      <button type="button" class="close" (click)="close()">&times;</button>
+    </div>
+    <form ngNativeValidate [formGroup]="forma" (ngSubmit)="confirm()">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Nombre</label>
+              <input formControlName="nombre_mostrar" name="nombre_mostrar" type="text" class="form-control"
+                placeholder="Nombre" required>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Monto</label>
+              <input formControlName="monto" name="monto" type="number" class="form-control" placeholder="Monto"
+                required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Nombre destinatario</label>
+              <input formControlName="nombre" name="nombre" type="text" class="form-control" placeholder="Destinatario"
+                required>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">CI</label>
+              <input formControlName="ci" name="ci" type="text" class="form-control" placeholder="CI" required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Banco</label>
+              <input formControlName="banco" name="banco" type="text" class="form-control" placeholder="Banco" required>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Numero cuenta</label>
+              <input formControlName="ncuenta" name="ncuenta" type="text" class="form-control" placeholder="Cuenta"
+                required>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Correo</label>
+              <input formControlName="correo" name="correo" type="email" class="form-control" placeholder="Correo" required>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary"[disabled]="compras.cargando">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="close()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
