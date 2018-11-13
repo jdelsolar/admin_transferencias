@@ -10,15 +10,27 @@
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">Nombre</label>
-              <input formControlName="nombre_mostrar" name="nombre_mostrar" type="text" class="form-control"
-                placeholder="Nombre" required>
+              <input
+                formControlName="nombre_mostrar"
+                name="nombre_mostrar"
+                type="text"
+                class="form-control"
+                placeholder="Nombre"
+                required
+              />
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">Monto</label>
-              <input formControlName="monto" name="monto" type="number" class="form-control" placeholder="Monto"
-                required>
+              <input
+                formControlName="monto"
+                name="monto"
+                type="number"
+                class="form-control"
+                placeholder="Monto"
+                required
+              />
             </div>
           </div>
         </div>
@@ -26,14 +38,27 @@
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">Nombre destinatario</label>
-              <input formControlName="nombre" name="nombre" type="text" class="form-control" placeholder="Destinatario"
-                required>
+              <input
+                formControlName="nombre"
+                name="nombre"
+                type="text"
+                class="form-control"
+                placeholder="Destinatario"
+                required
+              />
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">CI</label>
-              <input formControlName="ci" name="ci" type="text" class="form-control" placeholder="CI" required>
+              <input
+                formControlName="ci"
+                name="ci"
+                type="text"
+                class="form-control"
+                placeholder="CI"
+                required
+              />
             </div>
           </div>
         </div>
@@ -41,14 +66,27 @@
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">Banco</label>
-              <input formControlName="banco" name="banco" type="text" class="form-control" placeholder="Banco" required>
+              <!--
+                <input formControlName="banco" name="banco" type="text" class="form-control" placeholder="Banco" required>
+              -->
+              <select formControlName="banco" name="banco" class="form-control">
+                <option *ngFor="let b of compras.bancos" [value]="b.nombre">{{
+                  b.nombre
+                }}</option>
+              </select>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">Numero cuenta</label>
-              <input formControlName="ncuenta" name="ncuenta" type="text" class="form-control" placeholder="Cuenta"
-                required>
+              <input
+                formControlName="ncuenta"
+                name="ncuenta"
+                type="text"
+                class="form-control"
+                placeholder="Cuenta"
+                required
+              />
             </div>
           </div>
         </div>
@@ -56,15 +94,44 @@
           <div class="col">
             <div class="form-group">
               <label class="col-form-label">Correo</label>
-              <input formControlName="correo" name="correo" type="email" class="form-control" placeholder="Correo" required>
+              <input
+                formControlName="correo"
+                name="correo"
+                type="email"
+                class="form-control"
+                placeholder="Correo"
+                required
+              />
             </div>
           </div>
-          
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Banco destino</label>
+              <select
+                formControlName="banco_destino"
+                name="banco_destino"
+                class="form-control"
+                placeholder="Banco destino"
+                required
+              >
+                <option value="Santander">Santander</option>
+                <option value="Estado">Estado</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary"[disabled]="compras.cargando">Aceptar</button>
-        <button type="button" class="btn btn-default" (click)="close()">Cancelar</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="compras.cargando"
+        >
+          Aceptar
+        </button>
+        <button type="button" class="btn btn-default" (click)="close()">
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

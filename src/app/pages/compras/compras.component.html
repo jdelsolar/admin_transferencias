@@ -1,10 +1,20 @@
 <div class="container">
   <ul class="nav nav-pills">
     <li class="nav nav-item">
-      <button class="btn btn-group-sm btn-outline-primary" (click)="mostrarModalCompra()">Agregar Compra</button>
+      <button
+        class="btn btn-group-sm btn-outline-primary"
+        (click)="mostrarModalCompra()"
+      >
+        Agregar Compra
+      </button>
     </li>
     <li class="nav nav-item">
-      <button class="btn btn-group-sm btn-outline-primary" (click)="mostrarModalTransferencia()">Transferencia</button>
+      <button
+        class="btn btn-group-sm btn-outline-primary"
+        (click)="mostrarModalTransferencia()"
+      >
+        Transferencia
+      </button>
     </li>
   </ul>
 </div>
@@ -13,90 +23,192 @@
     <div class="card-header">
       Compra de Bs
       <span class="float-right">
-        <button class="btn btn-outline-danger" [disabled]="_compras.cargando || tieneTransferencia(compra)" (click)="borrar(compra.id)">
+        <button
+          class="btn btn-outline-danger"
+          [disabled]="compra.transferencias?.length > 0 || _compras.cargando"
+          (click)="borrar(compra.id)"
+        >
           Quitar <i class="fas fa-trash"></i>
         </button>
       </span>
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col">
+        <div class="col-auto">
           <div class="form-group row">
             <label for="chp" class="col-sm-4 col-form-label">CHP</label>
             <div class="col-sm-8">
-              <input type="text" readonly="" class="form-control-plaintext" id="chp" [value]="compra.montochp">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="chp"
+                [value]="compra.montochp | monto "
+              />
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-auto">
           <div class="form-group row">
             <label for="bs" class="col-sm-4 col-form-label">Bs</label>
             <div class="col-sm-8">
-              <input type="text" readonly="" class="form-control-plaintext" id="bs" [value]="compra.montobs">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="bs"
+                [value]="compra.montobs | monto"
+              />
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col-auto">
           <div class="form-group row">
-            <label for="tasa" class="col-sm-4 col-form-label ">Tasa mínima</label>
+            <label for="margen" class="col-sm-4 col-form-label">Margen %</label>
             <div class="col-sm-8">
-              <input type="text" readonly="" class="form-control-plaintext" id="tasa" [value]="compra.minTasa">
+              <input type="text" [(ngModel)]="_compras.margen" class="form-control" id="margen" />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="tasa" class="col-sm-4 col-form-label "
+              >Tasa máxima</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="tasa"
+                [value]="compra.tasaMax | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="tasa" class="col-sm-4 col-form-label "
+              >Tasa margen</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="tasa"
+                [value]="_compras.tasaMargen(compra) | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="tasa" class="col-sm-4 col-form-label "
+              >CHP a recuperar</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="tasa"
+                [value]="redondear(compra.montobs / _compras.tasaMargen(compra)) | monto"
+              />
             </div>
           </div>
         </div>
       </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Fecha</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">CHP</th>
-            <th scope="col">Tasa</th>
-            <th scope="col">Bs</th>
-            <th scope="col">Destinatario</th>
-            <th scope="col">Banco</th>
-            <th scope="col">Cuenta</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let t of compra.transferencias">
-            <td>{{ t.transferencia.fecha | date:'dd/MM/yyyy HH:mm'  }}</td>
-            <td>{{ t.transferencia.nombre_mostrar }}</td>
-            <td>{{ t.transferencia.monto }}</td>
-            <td>{{ t.transferencia.tasa }}</td>
-            <td>{{ _compras.montoBs(t) }}</td>
-            <td>{{ t.destinatario.nombre }}</td>
-            <td>{{ t.destinatario.banco }}</td>
-            <td>{{ t.destinatario.ncuenta }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Banco destino</th>
+              <th scope="col">CHP</th>
+              <th scope="col">Tasa</th>
+              <th scope="col">Bs</th>
+              <th scope="col">Destinatario</th>
+              <th scope="col">Banco</th>
+              <th scope="col">Cuenta</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of compra.transferencias">
+              <td>{{ fecha(t.transferencia.fecha)  }}</td>
+              <td>{{ t.transferencia.nombre_mostrar }}</td>
+              <td>{{ t.transferencia.banco_destino }}</td>
+              <td>{{ t.transferencia.monto | monto }}</td>
+              <td>{{ t.transferencia.tasa }}</td>
+              <td>{{ _compras.montoBs(t) | monto }}</td>
+              <td>{{ t.destinatario.nombre }}</td>
+              <td>{{ t.destinatario.banco }}</td>
+              <td>{{ t.destinatario.ncuenta }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  [disabled]="_compras.cargando"
+                  (click)="_compras.deleteTransferencia(t)"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="row">
-          <div class="col">
-            <div class="form-group row">
-              <label for="saldochp" class="col-sm-4 col-form-label">Saldo CHP</label>
-              <div class="col-sm-8">
-                <input type="text" readonly="" class="form-control-plaintext" id="saldochp" [value]="_compras.saldoCHP(compra)">
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group row">
-              <label for="saldobs" class="col-sm-4 col-form-label">Saldo Bs</label>
-              <div class="col-sm-8">
-                <input type="text" readonly="" class="form-control-plaintext" id="saldobs" [value]="_compras.saldoBs(compra)">
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group row">
-              <label for="saldotasa" class="col-sm-4 col-form-label ">Tasa mínima</label>
-              <div class="col-sm-8">
-                <input type="text" readonly="" class="form-control-plaintext" id="saldotasa" [value]="_compras.saldoTasa(compra)">
-              </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="saldochp" class="col-sm-4 col-form-label"
+              >CHP recuperados</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="saldochp"
+                [value]="_compras.sumaCHP(compra) | monto"
+              />
             </div>
           </div>
         </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="saldobs" class="col-sm-4 col-form-label"
+              >Saldo Bs</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="saldobs"
+                [value]="_compras.saldoBs(compra) | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="saldotasa" class="col-sm-4 col-form-label"
+              >Tasa remate</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="saldotasa"
+                [value]="_compras.saldoTasa(compra) | monto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -8,11 +8,15 @@ import { URL_SERVICIOS } from "../url.config";
 export class ComprasService {
   compras: any[] = [];
   cargando = false;
+  margen: number = 11;
+
+  bancos: any[] = [];
 
   constructor(private http: HttpClient) {
     this.cargarCompras().then(() => {
       this.compras.forEach(c => this.transferenciasPorCompra(c.id));
     });
+    this.getBancos();
   }
 
   agregarCompra(montoCHP, montoBs) {
@@ -26,7 +30,9 @@ export class ComprasService {
       this.http.post(url, params).subscribe(
         (resp: any) => {
           this.cargando = false;
-          this.cargarCompras();
+          this.cargarCompras().then(() => {
+            this.compras.forEach(c => this.transferenciasPorCompra(c.id));
+          });
           resolve();
         },
         err => {
@@ -60,7 +66,7 @@ export class ComprasService {
 
   private calcularTasa() {
     this.compras.forEach((compra: any) => {
-      compra.minTasa = parseFloat(compra.montobs) / parseFloat(compra.montochp);
+      compra.tasaMax = parseFloat(compra.montobs) / parseFloat(compra.montochp);
     });
   }
 
@@ -71,6 +77,9 @@ export class ComprasService {
       this.http.post(url, { id: id }).subscribe(
         (resp: any) => {
           this.cargando = false;
+          this.cargarCompras().then(() => {
+            this.compras.forEach(c => this.transferenciasPorCompra(c.id));
+          });
           resolve();
         },
         err => {
@@ -89,8 +98,9 @@ export class ComprasService {
       this.http.post(url, { id_compra: id_compra }).subscribe(
         (resp: any) => {
           const compra = this.compras.find(x => x.id === id_compra);
-          compra.transferencias = resp.transferencias;
-          console.log(this.compras);
+          if (resp.transferencias) {
+            compra.transferencias = resp.transferencias;
+          }
           this.cargando = false;
           resolve();
         },
@@ -137,7 +147,8 @@ export class ComprasService {
     let saldo = 0;
     if (compra.transferencias) {
       compra.transferencias.forEach(t => {
-        saldo += parseFloat(t.transferencia.monto) * parseFloat(t.transferencia.tasa);
+        saldo +=
+          parseFloat(t.transferencia.monto) * parseFloat(t.transferencia.tasa);
       });
     }
     return compra.montobs - saldo;
@@ -148,6 +159,52 @@ export class ComprasService {
   }
 
   montoBs(t) {
-    return Math.round( t.transferencia.monto * t.transferencia.tasa * 100) / 100;
+    return Math.round(t.transferencia.monto * t.transferencia.tasa * 100) / 100;
+  }
+
+  deleteTransferencia(transferencia) {
+    if (!confirm("Esta seguro de borrar la transferencia?")) {
+      return;
+    }
+    return new Promise((resolve, reject) => {
+      this.cargando = true;
+      const url = URL_SERVICIOS + "/compras/delete_transferencia";
+      this.http
+        .post(url, { id_transferencia: transferencia.transferencia.id })
+        .subscribe(
+          (resp: any) => {
+            this.transferenciasPorCompra(transferencia.transferencia.id_compra);
+            this.cargando = false;
+            resolve();
+          },
+          err => {
+            swal("No se puede borrar la transferencia");
+            this.cargando = false;
+            reject();
+          }
+        );
+    });
+  }
+
+  tasaMargen(compra) {
+    return compra.tasaMax / (this.margen / 100 + 1);
+  }
+
+  sumaCHP(compra) {
+    let saldo = 0;
+    if (compra.transferencias) {
+      compra.transferencias.forEach(t => {
+        saldo += parseFloat(t.transferencia.monto);
+      });
+    }
+
+    return saldo;
+  }
+
+  getBancos() {
+    this.http.get("assets/data/bancos.json").subscribe((resp: any) => {
+      this.bancos = resp.bancos;
+      // console.log( this.bancos );
+    });
   }
 }

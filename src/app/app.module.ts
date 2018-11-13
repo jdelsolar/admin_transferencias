@@ -20,6 +20,8 @@ import { ReporteComponent } from './pages/reporte/reporte.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { AgregarComponent } from './pages/compras/modals/agregar/agregar.component';
 import { TransferenciaComponent } from './pages/compras/modals/transferencia/transferencia.component';
+import { MontoPipe } from './pipes/monto.pipe';
+import { TasaPipe } from './pipes/tasa.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { TransferenciaComponent } from './pages/compras/modals/transferencia/tra
     ReporteComponent,
     ComprasComponent,
     AgregarComponent,
-    TransferenciaComponent
+    TransferenciaComponent,
+    MontoPipe,
+    TasaPipe
   ],
   imports: [
     BrowserModule,

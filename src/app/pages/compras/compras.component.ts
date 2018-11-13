@@ -11,20 +11,22 @@ import { TransferenciaComponent } from "./modals/transferencia/transferencia.com
   styleUrls: ["./compras.component.css"]
 })
 export class ComprasComponent implements OnInit, OnDestroy {
-  constructor(private dialogService: DialogService, public _compras: ComprasService) {}
+  constructor(
+    private dialogService: DialogService,
+    public _compras: ComprasService
+  ) {}
 
   modalCompra: Subscription;
   modalTransferencia: Subscription;
+
 
   ngOnInit() {}
 
   ngOnDestroy() {
     if (this.modalCompra) {
-
       this.modalCompra.unsubscribe();
     }
     if (this.modalTransferencia) {
-
       this.modalTransferencia.unsubscribe();
     }
   }
@@ -44,18 +46,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   }
 
   borrar(id) {
-    this._compras.deleteCompra(id).then( () => {
-      this._compras.cargarCompras();
-    });
-
-  }
-
-  tieneTransferencia(compra) {
-    if (compra.transferencias[0].id) {
-      return false;
-    } else {
-      return true;
-    }
+    this._compras.deleteCompra(id).then(() => {});
   }
 
   mostrarModalTransferencia() {
@@ -70,5 +61,14 @@ export class ComprasComponent implements OnInit, OnDestroy {
         } else {
         }
       });
+  }
+
+  redondear( num ) {
+    return Math.round(num);
+  }
+
+  fecha(fecha) {
+    const _fecha = new Date(fecha);
+    return _fecha.toLocaleDateString();
   }
 }
