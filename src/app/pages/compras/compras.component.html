@@ -36,28 +36,52 @@
       <div class="row">
         <div class="col-auto">
           <div class="form-group row">
-            <label for="chp" class="col-sm-4 col-form-label">CHP</label>
+            <label class="col-sm-4 col-form-label">CHP</label>
             <div class="col-sm-8">
               <input
                 type="text"
                 readonly=""
                 class="form-control-plaintext"
-                id="chp"
-                [value]="compra.montochp | monto "
+                [value]="compra.montochp | monto"
               />
             </div>
           </div>
         </div>
         <div class="col-auto">
           <div class="form-group row">
-            <label for="bs" class="col-sm-4 col-form-label">Bs</label>
+            <label class="col-sm-4 col-form-label">Bs</label>
             <div class="col-sm-8">
               <input
                 type="text"
                 readonly=""
                 class="form-control-plaintext"
-                id="bs"
                 [value]="compra.montobs | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Saldo Bs</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                [value]="compra.saldo | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Total Bs</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                [value]="_compras.totalBs(compra) | monto"
               />
             </div>
           </div>
@@ -66,7 +90,12 @@
           <div class="form-group row">
             <label for="margen" class="col-sm-4 col-form-label">Margen %</label>
             <div class="col-sm-8">
-              <input type="text" [(ngModel)]="_compras.margen" class="form-control" id="margen" />
+              <input
+                type="text"
+                [(ngModel)]="_compras.margen"
+                class="form-control"
+                id="margen"
+              />
             </div>
           </div>
         </div>
@@ -113,7 +142,10 @@
                 readonly=""
                 class="form-control-plaintext"
                 id="tasa"
-                [value]="redondear(compra.montobs / _compras.tasaMargen(compra)) | monto"
+                [value]="
+                  redondear(compra.montobs / _compras.tasaMargen(compra))
+                    | monto
+                "
               />
             </div>
           </div>
@@ -137,7 +169,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let t of compra.transferencias">
-              <td>{{ fecha(t.transferencia.fecha)  }}</td>
+              <td>{{ fecha(t.transferencia.fecha) }}</td>
               <td>{{ t.transferencia.nombre_mostrar }}</td>
               <td>{{ t.transferencia.banco_destino }}</td>
               <td>{{ t.transferencia.monto | monto }}</td>

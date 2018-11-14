@@ -1,45 +1,92 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+      <h4 class="modal-title">{{ title || "Confirm" }}</h4>
       <button type="button" class="close" (click)="close()">&times;</button>
     </div>
     <form [formGroup]="forma" (ngSubmit)="confirm()">
-    <div class="modal-body">
+      <div class="modal-body">
         <div class="row">
-          <div class="col">
+          <div class="col-auto">
             <div class="form-group">
               <label class="col-form-label">Monto CHP</label>
-              <input formControlName="chp" name="chp" type="number" class="form-control" placeholder="CHP" [ngClass]="(chp.invalid && (chp.dirty || chp.touched)) ? 'is-invalid' : ''">
+              <input
+                formControlName="montochp"
+                name="montochp"
+                type="number"
+                class="form-control"
+                placeholder="CHP"
+                [ngClass]="
+                  montochp.invalid && (montochp.dirty || montochp.touched) ? 'is-invalid' : ''
+                "
+              />
 
-              <div *ngIf="chp.invalid && (chp.dirty || chp.touched)" class="invalid-feedback">
-
-                <div *ngIf=" chp?.errors['required'] ">
-                  Escriba chp
-                </div>
-
+              <div
+                *ngIf="montochp.invalid && (montochp.dirty || montochp.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="(montochp?.errors)['required']">Escriba chp</div>
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col-auto">
             <div class="form-group">
               <label class="col-form-label">Monto Bs</label>
-              <input formControlName="bs" name="bs" type="number" class="form-control" placeholder="Bs" [ngClass]="(bs.invalid && (bs.dirty || bs.touched)) ? 'is-invalid' : ''">
-              <div *ngIf="bs.invalid && (bs.dirty || bs.touched)" class="invalid-feedback">
-
-                <div *ngIf=" bs?.errors['required'] ">
-                  Escriba bs
-                </div>
-
+              <input
+                formControlName="montobs"
+                name="montobs"
+                type="number"
+                class="form-control"
+                placeholder="montobs"
+                [ngClass]="
+                  montobs.invalid && (montobs.dirty || montobs.touched) ? 'is-invalid' : ''
+                "
+              />
+              <div
+                *ngIf="montobs.invalid && (montobs.dirty || montobs.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="(montobs?.errors)['required']">Escriba bs</div>
               </div>
             </div>
           </div>
 
+          <div class="col-auto">
+            <div class="form-group">
+              <label class="col-form-label">Saldo Bs</label>
+              <input
+                formControlName="saldo"
+                name="saldo"
+                type="number"
+                class="form-control"
+                placeholder="Salso Bs"
+                [ngClass]="
+                  saldo.invalid && (saldo.dirty || saldo.touched)
+                    ? 'is-invalid'
+                    : ''
+                "
+              />
+              <div
+                *ngIf="saldo.invalid && (saldo.dirty || saldo.touched)"
+                class="invalid-feedback"
+              >
+                <div *ngIf="(saldo?.errors)['required']">Escriba saldo</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="compras.cargando">Aceptar</button>
-        <button type="button" class="btn btn-default" (click)="close()">Cancelar</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="compras.cargando"
+        >
+          Aceptar
+        </button>
+        <button type="button" class="btn btn-default" (click)="close()">
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

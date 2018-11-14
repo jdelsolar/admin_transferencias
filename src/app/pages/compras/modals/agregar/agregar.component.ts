@@ -23,16 +23,20 @@ export class AgregarComponent extends DialogComponent<ConfirmModel, boolean>
     super(dialogService);
 
     this.forma = new FormGroup({
-      chp: new FormControl("", [Validators.required]),
-      bs: new FormControl("", Validators.required)
+      montochp: new FormControl("", [Validators.required]),
+      montobs: new FormControl("", Validators.required),
+      saldo: new FormControl(0, Validators.required),
     });
   }
 
-  get chp() {
-    return this.forma.get("chp");
+  get montochp() {
+    return this.forma.get("montochp");
   }
-  get bs() {
-    return this.forma.get("bs");
+  get montobs() {
+    return this.forma.get("montobs");
+  }
+  get saldo() {
+    return this.forma.get("saldo");
   }
 
   confirm() {
@@ -40,7 +44,7 @@ export class AgregarComponent extends DialogComponent<ConfirmModel, boolean>
       return;
     }
     this.compras
-      .agregarCompra(this.forma.get("chp").value, this.forma.get("bs").value)
+      .agregarCompra(this.forma.value)
       .then(() => {
         this.result = true;
         this.close();

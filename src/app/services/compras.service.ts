@@ -19,14 +19,11 @@ export class ComprasService {
     this.getBancos();
   }
 
-  agregarCompra(montoCHP, montoBs) {
+  agregarCompra(compra: any) {
     return new Promise((resolve, reject) => {
       this.cargando = true;
       const url = URL_SERVICIOS + "/compras/insert_compra";
-      const params = {
-        montochp: montoCHP,
-        montobs: montoBs
-      };
+      const params = compra;
       this.http.post(url, params).subscribe(
         (resp: any) => {
           this.cargando = false;
@@ -151,7 +148,11 @@ export class ComprasService {
           parseFloat(t.transferencia.monto) * parseFloat(t.transferencia.tasa);
       });
     }
-    return compra.montobs - saldo;
+    return (
+      Math.round(
+        (parseFloat(compra.montobs) + parseFloat(compra.saldo) - saldo) * 100
+      ) / 100
+    );
   }
 
   saldoTasa(compra) {
@@ -204,7 +205,14 @@ export class ComprasService {
   getBancos() {
     this.http.get("assets/data/bancos.json").subscribe((resp: any) => {
       this.bancos = resp.bancos;
-      // console.log( this.bancos );
     });
+  }
+
+  totalBs(compra: any) {
+    return (
+      Math.round(
+        (parseFloat(compra.saldo) + parseFloat(compra.montobs)) * 100
+      ) / 100
+    );
   }
 }
