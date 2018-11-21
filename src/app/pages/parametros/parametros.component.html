@@ -1,23 +1,80 @@
-<div class="container" *ngIf="_usuario.usuario.id && _usuario.usuario.rol === 'A'">
-
-	<form [formGroup]="forma" (submit)="enviarTasa()">
-		<div class="form-group col-md-2 " [ngClass]="(forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)) ? 'has-danger' : '' ">
-			<label class="col-form-label" for="inputDefault">Tasa</label>
-			<input formControlName="tasa" name="tasa" type="number" class="form-control " placeholder="Tasa" id="inputDefault" [ngClass]="(forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)) ? 'is-invalid' : '' ">
-			<div *ngIf="forma.get('tasa').invalid && (forma.get('tasa').dirty || forma.get('tasa').touched)" class="invalid-feedback">Tasa
-				incorrecta
-			</div>
-		</div>
-		<div class="col-md-2">
-			<button type="submit" class="btn btn-primary">Cambiar</button>
-		</div>
-	</form>
-
+<div
+  class="container"
+  *ngIf="_usuario.usuario.id && _usuario.usuario.rol === 'A'"
+>
+  <form [formGroup]="forma" (submit)="actualizarParametros()">
+    <div
+      class="form-group col-md-2 "
+      [ngClass]="
+        forma.get('tasa').invalid &&
+        (forma.get('tasa').dirty || forma.get('tasa').touched)
+          ? 'has-danger'
+          : ''
+      "
+    >
+      <label class="col-form-label" for="inputDefault">Tasa</label>
+      <input
+        formControlName="tasa"
+        name="tasa"
+        type="number"
+        class="form-control "
+        placeholder="Tasa"
+        id="inputDefault"
+        [ngClass]="
+          forma.get('tasa').invalid &&
+          (forma.get('tasa').dirty || forma.get('tasa').touched)
+            ? 'is-invalid'
+            : ''
+        "
+      />
+      <div
+        *ngIf="
+          forma.get('tasa').invalid &&
+          (forma.get('tasa').dirty || forma.get('tasa').touched)
+        "
+        class="invalid-feedback"
+      >
+        Tasa incorrecta
+      </div>
+    </div>
+    <div
+      class="form-group col-md-2 "
+      [ngClass]="
+        vendedor.invalid && (vendedor.dirty || vendedor.touched)
+          ? 'has-danger'
+          : ''
+      "
+    >
+      <label class="col-form-label" for="inputDefault">% Vendedor</label>
+      <input
+        formControlName="vendedor"
+        name="vendedor"
+        type="number"
+        class="form-control "
+        placeholder="% "
+        id="inputDefault"
+        [ngClass]="
+          vendedor.invalid && (vendedor.dirty || vendedor.touched)
+            ? 'is-invalid'
+            : ''
+        "
+      />
+      <div
+        *ngIf="vendedor.invalid && (vendedor.dirty || vendedor.touched)"
+        class="invalid-feedback"
+      >
+        % incorrecto
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary">Cambiar</button>
+    </div>
+  </form>
 </div>
 
 <div class="container" *ngIf="!_usuario.usuario.id">
-	<h4> Debe ingresar para ver las transferencias </h4>
+  <h4>Debe ingresar para ver las transferencias</h4>
 </div>
 <div class="container" *ngIf="_usuario.usuario.rol != 'A'">
-	<h4> Sin permisos. </h4>
+  <h4>Sin permisos.</h4>
 </div>
