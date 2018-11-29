@@ -4,6 +4,7 @@ import { DialogService } from "ng2-bootstrap-modal";
 import { ComprasService } from "src/app/services/compras.service";
 import { Subscription } from "rxjs";
 import { TransferenciaComponent } from "./modals/transferencia/transferencia.component";
+import { UsuarioService } from "src/app/services/usuario.service";
 
 @Component({
   selector: "app-compras",
@@ -13,7 +14,8 @@ import { TransferenciaComponent } from "./modals/transferencia/transferencia.com
 export class ComprasComponent implements OnInit, OnDestroy {
   constructor(
     private dialogService: DialogService,
-    public _compras: ComprasService
+    public _compras: ComprasService,
+    public usuario: UsuarioService
   ) {}
 
   modalCompra: Subscription;

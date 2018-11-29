@@ -24,4 +24,22 @@ export class ListaComponent implements OnInit {
       this._cuentas.eliminar(cuenta);
     }
   }
+
+  mostrarRol(rol) {
+    let _rol = "";
+    switch (rol) {
+      case "A":
+        _rol = "Administrador";
+        break;
+      case "U":
+        _rol = "Usuario";
+        break;
+      case "V":
+        _rol = "Vendedor";
+        break;
+      default:
+        break;
+    }
+    return _rol;
+  }
 }

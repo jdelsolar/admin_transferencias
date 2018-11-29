@@ -116,6 +116,24 @@
               >
                 <option value="Santander">Santander</option>
                 <option value="Estado">Estado</option>
+                <option value="Efectivo">Efectivo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="col-form-label">Cod vendedor</label>
+              <select
+                formControlName="cod_vendedor"
+                name="cod_vendedor"
+                class="form-control"
+                placeholder="Cod vendedor"
+              >
+                <option *ngFor="let v of compras.vendedores" [value]="v.id"
+                  >Cod: {{ v.id }} - {{ v.nombre }}</option
+                >
               </select>
             </div>
           </div>

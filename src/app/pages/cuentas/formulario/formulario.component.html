@@ -24,6 +24,7 @@
       <select formControlName="rol" name="rol" class="form-control" id="exampleSelect1" required>
         <option value="A">Administrador</option>
         <option value="U">Usuario</option>
+        <option value="V">Vendedor</option>
       </select>
     </div>
     <button (click)="agregar_modificar()" [disabled]="_cuenta.cargando" type="submit" class="btn btn-primary">{{

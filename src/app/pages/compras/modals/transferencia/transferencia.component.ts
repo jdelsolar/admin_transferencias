@@ -34,7 +34,8 @@ export class TransferenciaComponent
       tipo_cuenta: new FormControl("Corriente", Validators.required),
       monto: new FormControl("", Validators.required),
       nombre_mostrar: new FormControl("", Validators.required),
-      banco_destino: new FormControl("", Validators.required)
+      banco_destino: new FormControl("", Validators.required),
+      cod_vendedor: new FormControl("")
     });
   }
 

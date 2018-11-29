@@ -12,11 +12,53 @@ export class ComprasService {
 
   bancos: any[] = [];
 
+  _tasa: string;
+  _comision: string;
+
+  vendedores: any[] = [];
+
   constructor(private http: HttpClient) {
     this.cargarCompras().then(() => {
       this.compras.forEach(c => this.transferenciasPorCompra(c.id));
     });
     this.getBancos();
+    this.obtenerTasa();
+    this.listVendedores();
+  }
+
+  listVendedores() {
+    return new Promise((resolve, reject) => {
+      const url = URL_SERVICIOS + "/vendedor/list_vendedores";
+      this.http.get(url).subscribe(
+        (resp: any) => {
+          this.vendedores = resp.vendedores;
+          resolve();
+        },
+        err => reject()
+      );
+    });
+  }
+
+  get tasa() {
+    return parseFloat(this._tasa);
+  }
+
+  get comision() {
+    return parseFloat(this._comision);
+  }
+
+  obtenerTasa() {
+    return new Promise((resolve, reject) => {
+      const url = URL_SERVICIOS + "/parametros/obtener_tasa";
+      this.http.get(url).subscribe(
+        (resp: any) => {
+          this._tasa = resp.tasa;
+          this._comision = resp.vendedor;
+          resolve();
+        },
+        err => reject()
+      );
+    });
   }
 
   agregarCompra(compra: any) {
@@ -185,6 +227,10 @@ export class ComprasService {
           }
         );
     });
+  }
+
+  margenActual(compra) {
+    return (compra.tasaMax / this.tasa - 1) * 100;
   }
 
   tasaMargen(compra) {
