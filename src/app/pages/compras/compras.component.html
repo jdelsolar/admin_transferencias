@@ -19,7 +19,7 @@
     </li>
   </ul>
 </div>
-<div class="container">
+<div class="container-fluid">
   <div *ngFor="let compra of _compras.compras" class="card bg-light">
     <div class="card-header">
       Bloque N° {{ compra.id }}
@@ -70,6 +70,32 @@
                 readonly=""
                 class="form-control-plaintext"
                 [value]="compra.saldo | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Saldo CHP</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                [value]="compra.SaldoAnteriorCHP | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Total CHP</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                [value]="compra.TotalCHP | monto"
               />
             </div>
           </div>
@@ -235,6 +261,22 @@
                 class="form-control-plaintext"
                 id="saldochp"
                 [value]="_compras.sumaCHP(compra) | monto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-group row">
+            <label for="saldochp" class="col-sm-4 col-form-label"
+              >Utilidad CHP</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                readonly=""
+                class="form-control-plaintext"
+                id="saldochp"
+                [value]="-1 * _compras.restantesCHP(compra) | monto"
               />
             </div>
           </div>

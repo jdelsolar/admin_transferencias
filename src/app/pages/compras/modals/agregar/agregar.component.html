@@ -53,13 +53,13 @@
 
           <div class="col-auto">
             <div class="form-group">
-              <label class="col-form-label">Saldo Bs</label>
+              <label class="col-form-label">Saldo Bs {{ saldoAnterior }}</label>
               <input
                 formControlName="saldo"
                 name="saldo"
                 type="number"
                 class="form-control"
-                placeholder="Salso Bs"
+                placeholder="Saldo Bs"
                 [ngClass]="
                   saldo.invalid && (saldo.dirty || saldo.touched)
                     ? 'is-invalid'

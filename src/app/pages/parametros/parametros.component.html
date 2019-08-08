@@ -12,7 +12,7 @@
           : ''
       "
     >
-      <label class="col-form-label" for="inputDefault">Tasa</label>
+      <label class="col-form-label" for="inputDefault">Tasa Chile</label>
       <input
         formControlName="tasa"
         name="tasa"
@@ -37,6 +37,54 @@
         Tasa incorrecta
       </div>
     </div>
+
+
+    <!-- argentina -->
+    <div class="form-group col-md-2 " [ngClass]="
+          forma.get('argentina').invalid &&
+          (forma.get('argentina').dirty || forma.get('argentina').touched)
+            ? 'has-danger'
+            : ''
+        ">
+      <label class="col-form-label" for="inputDefault">Tasa Argentina</label>
+      <input formControlName="argentina" name="argentina" type="number" class="form-control " placeholder="Argentina"
+        id="inputDefault" [ngClass]="
+            forma.get('argentina').invalid &&
+            (forma.get('argentina').dirty || forma.get('argentina').touched)
+              ? 'is-invalid'
+              : ''
+          " />
+      <div *ngIf="
+            forma.get('argentina').invalid &&
+            (forma.get('argentina').dirty || forma.get('argentina').touched)
+          " class="invalid-feedback">
+        Tasa Argentina incorrecta
+      </div>
+    </div>
+
+    <!-- colombia -->
+    <div class="form-group col-md-2 " [ngClass]="
+          forma.get('colombia').invalid &&
+          (forma.get('colombia').dirty || forma.get('colombia').touched)
+            ? 'has-danger'
+            : ''
+        ">
+      <label class="col-form-label" for="inputDefault">Tasa Colombia</label>
+      <input formControlName="colombia" name="colombia" type="number" class="form-control " placeholder="colombia"
+        id="inputDefault" [ngClass]="
+            forma.get('colombia').invalid &&
+            (forma.get('colombia').dirty || forma.get('colombia').touched)
+              ? 'is-invalid'
+              : ''
+          " />
+      <div *ngIf="
+            forma.get('colombia').invalid &&
+            (forma.get('colombia').dirty || forma.get('colombia').touched)
+          " class="invalid-feedback">
+        Tasa Colombia incorrecta
+      </div>
+    </div>
+
     <div
       class="form-group col-md-2 "
       [ngClass]="

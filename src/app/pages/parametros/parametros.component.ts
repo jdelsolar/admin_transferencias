@@ -23,6 +23,8 @@ export class ParametrosComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.forma = new FormGroup({
       tasa: new FormControl("", [Validators.required, Validators.min(0)]),
+      argentina: new FormControl("", [Validators.required, Validators.min(0)]),
+      colombia: new FormControl("", [Validators.required, Validators.min(0)]),
       vendedor: new FormControl("", [Validators.required, Validators.min(0)])
     });
 
@@ -30,12 +32,23 @@ export class ParametrosComponent implements OnInit, OnDestroy {
     //   this.forma.get("tasa").setValue(val);
     // });
     this.sub = this._parametros.observarParametros().subscribe(resp => {
-      this.forma.setValue({ tasa: resp.tasa, vendedor: resp.vendedor });
+      this.forma.setValue({ 
+        tasa: resp.tasa, 
+        argentina: resp.argentina, 
+        colombia: resp.colombia, 
+        vendedor: resp.vendedor 
+      });
     });
   }
 
   get tasa() {
     return this.forma.get("tasa");
+  }
+  get argentina() {
+    return this.forma.get("argentina");
+  }
+  get colombia() {
+    return this.forma.get("colombia");
   }
   get vendedor() {
     return this.forma.get("vendedor");
@@ -50,9 +63,20 @@ export class ParametrosComponent implements OnInit, OnDestroy {
       console.log("Formulario correcto");
       this.sub.unsubscribe();
 
-      this._parametros.cambiarTasa(this.forma.get("tasa").value).then(() => {
-        this.sub = this._parametros.observarTasa().subscribe(val => {
-          this.forma.get("tasa").setValue(val);
+      this._parametros.cambiarTasa({
+        tasa: this.tasa.value,
+        argentina: this.argentina.value,
+        colombia: this.colombia.value,
+        vendedor: this.vendedor.value
+      }).then(() => {
+        this.sub = this._parametros.observarTasa().subscribe((val: any) => {
+          // this.forma.get("tasa").setValue(val.tasa);
+          this.forma.setValue({
+            tasa: val.tasa, 
+            argentina: val.argentina, 
+            colombia: val.colombia, 
+            vendedor: val.vendedor 
+          });
         });
         swal("Se ha cambiado la tasa");
       });
@@ -65,7 +89,11 @@ export class ParametrosComponent implements OnInit, OnDestroy {
 
       this._parametros.actualizarParametros(this.forma.value).then(() => {
         this.sub = this._parametros.observarParametros().subscribe(val => {
-          this.forma.setValue({ tasa: val.tasa, vendedor: val.vendedor });
+          this.forma.setValue({ 
+            tasa: val.tasa, 
+            argentina: val.argentina, 
+            colombia: val.colombia, 
+            vendedor: val.vendedor });
         });
         swal("Se actualizaron los parámetros");
       });

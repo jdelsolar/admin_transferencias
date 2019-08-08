@@ -20,10 +20,30 @@ export class ComprasService {
   constructor(private http: HttpClient) {
     this.cargarCompras().then(() => {
       this.compras.forEach(c => this.transferenciasPorCompra(c.id));
+      this.saldoAnterorCHP();
+      
     });
     this.getBancos();
     this.obtenerTasa();
     this.listVendedores();
+  }
+
+  saldoAnterorCHP() {
+    
+    for (let i = 0; i < this.compras.length - 1; i++) {
+        
+        let tasaMaxAnt = this.compras[i + 1].tasaMax;
+        let saldoAnteriorCHP = Math.round(this.compras[i].saldo / tasaMaxAnt) ;
+        this.compras[i].SaldoAnteriorCHP = saldoAnteriorCHP;
+        this.compras[i].TotalCHP = saldoAnteriorCHP + this.compras[i].montochp * 1;
+        this.compras[i].TotalBs = this.compras[i].montobs*1 + this.compras[i].saldo*1;
+        this.compras[i].tasaMax = this.compras[i].TotalBs / this.compras[i].TotalCHP;
+        
+    }
+    this.compras[this.compras.length - 1].SaldoAnteriorCHP = 0;
+    this.compras[this.compras.length - 1].TotalCHP = this.compras[this.compras.length - 1].montochp * 1;
+    this.compras[this.compras.length - 1].TotalBs = this.compras[this.compras.length - 1].montobs*1 + this.compras[this.compras.length - 1].saldo*1;
+    this.compras[this.compras.length - 1].tasaMax = this.compras[this.compras.length - 1].TotalBs / this.compras[this.compras.length - 1].TotalCHP;
   }
 
   listVendedores() {
@@ -71,6 +91,7 @@ export class ComprasService {
           this.cargando = false;
           this.cargarCompras().then(() => {
             this.compras.forEach(c => this.transferenciasPorCompra(c.id));
+            this.saldoAnterorCHP();
           });
           resolve();
         },
@@ -118,6 +139,7 @@ export class ComprasService {
           this.cargando = false;
           this.cargarCompras().then(() => {
             this.compras.forEach(c => this.transferenciasPorCompra(c.id));
+            this.saldoAnterorCHP();
           });
           resolve();
         },
@@ -198,7 +220,7 @@ export class ComprasService {
   }
 
   saldoTasa(compra) {
-    return this.saldoBs(compra) / this.saldoCHP(compra);
+    return this.saldoBs(compra) / this.restantesCHP(compra);
   }
 
   montoBs(t) {
@@ -246,6 +268,15 @@ export class ComprasService {
     }
 
     return saldo;
+  }
+
+  restantesCHP(compra) {
+    let restantes = 0;
+    if (compra.transferencias) {
+      restantes = compra.TotalCHP - this.sumaCHP(compra);
+    }
+
+    return restantes;
   }
 
   getBancos() {

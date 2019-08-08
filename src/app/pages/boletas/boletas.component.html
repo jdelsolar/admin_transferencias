@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <!-- FORMULARIO BOLETA -->
+    <div class="col-md-3 border p-1">
+      <h5>Nueva boleta</h5>
+      <form ngNativeValidate [formGroup]="forma" (ngSubmit)="confirm()">
+        <div class="form-group">
+          <label>Nombre destinatario</label>
+          <input type="text" formControlName="destinatario" name="destinatario" required
+            class="form-control" placeholder="Destinatario" />
+          <small class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+          <label>Rut</label>
+          <input type="text" formControlName="rut" name="rut" required
+            class="form-control" placeholder="Rut" />
+          <small class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+          <label>Monto</label>
+          <input type="number" formControlName="monto" name="monto" min="0" max="100000" required
+            class="form-control" placeholder="Monto" />
+          <small class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date" formControlName="fecha" name="fecha" required 
+            class="form-control" placeholder="Monto" />
+          <small class="form-text text-muted"></small>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="_boletas.enviando" >Enviar Boleta</button>
+      </form>
+    </div>
+    <!-- TABLA CON LAS BOLETAS -->
+    <div class="col-md-9">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Folio</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">rut</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Ambiente</th>
+            <th scope="col">Pdf</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let boleta of _boletas.lista" >
+            <th scope="row">{{ boleta.folio }}</th>
+            <td>{{ boleta.fecha }}</td>
+            <td>{{ boleta.nombre }}</td>
+            <td>{{ boleta.rut }}</td>
+            <td>{{ boleta.monto }}</td>
+            <td>{{ boleta.ambiente }}</td>
+            <td> <a [href]="boleta.pdf" target="_blank" > <i class="fas fa-file-alt"></i> </a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <ul class="pagination">
+          <li class="page-item ">
+            <a class="page-link" (click)="retrocedePag()">&laquo;</a>
+          </li>
+          
+          <li class="page-item">
+            <a class="page-link" (click)="avanzaPag()">&raquo;</a>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>

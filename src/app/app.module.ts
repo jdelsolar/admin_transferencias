@@ -22,6 +22,10 @@ import { AgregarComponent } from './pages/compras/modals/agregar/agregar.compone
 import { TransferenciaComponent } from './pages/compras/modals/transferencia/transferencia.component';
 import { MontoPipe } from './pipes/monto.pipe';
 import { TasaPipe } from './pipes/tasa.pipe';
+import { BoletasComponent } from './pages/boletas/boletas.component';
+import { RegistradosComponent } from './pages/registrados/registrados.component';
+import { FotoPipe } from './pipes/foto.pipe';
+import { BoletasIvaComponent } from './pages/boletas-iva/boletas-iva.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { TasaPipe } from './pipes/tasa.pipe';
     AgregarComponent,
     TransferenciaComponent,
     MontoPipe,
-    TasaPipe
+    TasaPipe,
+    BoletasComponent,
+    RegistradosComponent,
+    FotoPipe,
+    BoletasIvaComponent
   ],
   imports: [
     BrowserModule,

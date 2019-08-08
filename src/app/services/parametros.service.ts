@@ -37,10 +37,10 @@ export class ParametrosService {
     });
   }
 
-  cambiarTasa(val: string) {
+  cambiarTasa(val: any) {
     return new Promise((resolve, reject) => {
       const url = URL_SERVICIOS + "/parametros/actualizar_tasa";
-      this.http.post(url, { tasa: val }).subscribe(
+      this.http.post(url, val).subscribe(
         (resp: any) => {
           //this.tasa = resp.tasa;
           resolve();

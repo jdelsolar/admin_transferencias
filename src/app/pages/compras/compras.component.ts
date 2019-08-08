@@ -34,10 +34,12 @@ export class ComprasComponent implements OnInit, OnDestroy {
   }
 
   mostrarModalCompra() {
+    
     this.modalCompra = this.dialogService
       .addDialog(AgregarComponent, {
         title: "Agregar Compra",
-        message: "Confirm message"
+        message: "Confirm message",
+        saldoAnterior: "" + this._compras.compras[0].saldo
       })
       .subscribe(isConfirmed => {
         //We get dialog result

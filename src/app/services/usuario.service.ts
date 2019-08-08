@@ -41,6 +41,11 @@ export class UsuarioService {
       );
     });
   }
+
+  cerrarSesion() {
+    this.usuario = {};
+    localStorage.clear();
+  }
 }
 
 export interface Usuario {

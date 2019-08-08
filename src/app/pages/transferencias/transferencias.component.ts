@@ -7,6 +7,7 @@ import {
 } from "../../services/transferencias.service";
 
 import swal from "sweetalert";
+
 import { _sanitizeHtml } from "@angular/core/src/sanitization/html_sanitizer";
 
 @Component({
@@ -18,6 +19,8 @@ export class TransferenciasComponent implements OnInit {
   tran: TransferenciaDestinatario = {};
   id_rechazo: string = null;
   id_finalizar: string = null;
+
+  //cod: string = "CLP";
 
   constructor(
     public _usuario: UsuarioService,
@@ -51,6 +54,23 @@ export class TransferenciasComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  eliminar(id: string) {
+    const token = this._usuario.usuario.token;
+
+    if (confirm("Está seguro que desea eliminar la transacción?")) {
+      // eliminamos la transferencia
+      this._tansf.eliminar(token, id).subscribe(
+        (resp: any) => {
+          this._tansf.cargarTransferencias(
+            this._usuario.usuario.token,
+            this._tansf.pag
+          );
+        },
+        err => {}
+      );
+    }
   }
 
   rechazar(id: string) {

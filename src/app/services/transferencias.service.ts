@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { HttpClient } from "@angular/common/http";
 import { URL_SERVICIOS } from "../url.config";
+import { UsuarioService } from "./usuario.service";
 
 @Injectable({
   providedIn: "root"
@@ -17,15 +18,17 @@ export class TransferenciasService {
 
   paginas: number[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public _usuario: UsuarioService) {}
 
-  cargarTransferencias(token: string, pag: number, estado = '') {
+  cargarTransferencias(token: string, pag: number, estado = "") {
     const url =
       URL_SERVICIOS +
       "/transferencias/transferencias_admin/" +
       token +
       "/" +
-      pag + "/" + estado;
+      pag +
+      "/" +
+      estado;
 
     this.http.get(url).subscribe(
       (resp: any) => {
@@ -40,7 +43,11 @@ export class TransferenciasService {
           }
         }
       },
-      err => {}
+      (err: any) => {
+        if (err.starus === 401) {
+          this._usuario.cerrarSesion();
+        }
+      }
     );
   }
 
@@ -65,6 +72,21 @@ export class TransferenciasService {
       nombre_archivo: nombre_archivo
     });
   }
+
+  listar() {
+    const url = URL_SERVICIOS + "/usuario/listar";
+
+    return this.http.get(url);
+  }
+
+  eliminar(token: string, id_transferencia: string) {
+    // admin_eliminar
+    const url = URL_SERVICIOS + "/transferencias/admin_eliminar";
+    return this.http.post(url, {
+      token: token,
+      id_transferencia: id_transferencia
+    });
+  }
 }
 
 export interface TransferenciaDestinatario {
@@ -84,6 +106,8 @@ export interface Usuario {
   clave?: string;
   token?: any;
   ci?: string;
+  telefono?: string;
+  foto?: string;
 }
 
 export interface Destinatario {

@@ -14,12 +14,20 @@
     </div>
   </div>
   <div class="row separar" *ngFor="let tranf of _tansf.transferencias">
-    
-    <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
+    <div class="col-sm">
+    {{ tranf?.transferencia?.fecha }}
+    </div>
+    <div *ngIf="_usuario.usuario.rol === 'A' " class="col-sm">
       {{ tranf?.usuario?.nombres }} {{ tranf?.usuario?.paterno }}
     </div>
     <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
-      CL$ {{ tranf?.transferencia?.monto }}
+      {{ tranf?.usuario?.pais }}
+    </div>
+    <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
+      <span *ngIf="tranf?.usuario?.pais === 'Chile'">CHP $</span>
+      <span *ngIf="tranf?.usuario?.pais === 'Colombia'">COL $</span>
+      <span *ngIf="tranf?.usuario?.pais === 'Argentina'">ARS $</span>
+      {{ tranf?.transferencia?.monto }}
     </div>
     <div *ngIf="_usuario.usuario.rol === 'A'" class="col-sm">
       Tasa Bs$ {{ tranf?.transferencia?.tasa }}
@@ -59,6 +67,9 @@
       </div>
       <div class="p-1">
         <button type="button" (click)="ver( tranf )" class="btn btn-outline-primary">Ver</button>
+      </div>
+      <div class="p-1">
+        <button type="button" (click)="eliminar( tranf.transferencia.id )" class="btn btn-outline-primary">Eliminar</button>
       </div>
     </div>
 

@@ -35,9 +35,12 @@ export class CuentasService {
           this.cargando = false;
         }
       },
-      err => {
+      (err: any) => {
         console.log("Error", err);
         this.cargando = false;
+        if(err.status === 401) {
+          this._usuario.cerrarSesion();
+        }
       }
     );
   }
